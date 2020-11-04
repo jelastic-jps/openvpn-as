@@ -183,7 +183,8 @@ actions:
             nodeId: "${globals.nodeId}",
             deployHook: "${globals.letsEncryptDeployHook}",
             undeployHook: "${globals.letsEncryptDeployHook}",
-            test: !customDomains
+            test: !customDomains,
+            fallbackToX1: true
           }
         };
 
