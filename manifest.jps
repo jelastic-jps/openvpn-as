@@ -159,13 +159,13 @@ actions:
                ${globals.ovpn}/sacli --key "cs.priv_key"  --value_file "${globals.letsEncryptBaseDir}var/lib/jelastic/keys/privkey.pem" ConfigPut\n
                ${globals.ovpn}/sacli --key "cs.cert"      --value_file "${globals.letsEncryptBaseDir}var/lib/jelastic/keys/cert.pem" ConfigPut\n
                ${globals.ovpn}/sacli --key "cs.ca_bundle" --value_file "${globals.letsEncryptBaseDir}var/lib/jelastic/keys/fullchain.pem" ConfigPut\n
-               ${globals.ovpn}/sacli start' > ${globals.letsEncryptDeployHook};
+               ${globals.ovpn}/sacli --restart_mode=dry_run Start' > ${globals.letsEncryptDeployHook};
         mkdir -p $(dirname ${globals.letsEncryptUndeployHook});
         printf '#!/bin/bash\n
                ${globals.ovpn}/sacli --key "cs.priv_key" ConfigDel\n
                ${globals.ovpn}/sacli --key "cs.ca_bundle" ConfigDel\n
                ${globals.ovpn}/sacli --key "cs.cert" ConfigDel\n
-               ${globals.ovpn}/sacli start' > ${globals.letsEncryptUndeployHook};
+               ${globals.ovpn}/sacli --restart_mode=dry_run Start' > ${globals.letsEncryptUndeployHook};
       user: root
     - script: |
         var customDomains = "${this.customDomains}",
