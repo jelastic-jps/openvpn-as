@@ -36,9 +36,9 @@ settings:
           tooltip:
             y: -1
             text: |
-              Client access to the environmetns private subnets.<br><br>
+              Client can access own private cloud network.<br><br>
               <b>Note</b>:<br>
-              <ul style="list-style: disc inside;"><li>private subnets access works only within the same isolated environment group or within the same region where OpenVPN Access Server is installed</li>
+              <ul style="list-style: disc inside;"><li>private cloud network is limited with the same <a href="https://docs.jelastic.com/environment-isolation/">isolated environment group</a> or with the same <a href="https://docs.jelastic.com/environment-regions/">region</a> where OpenVPN Access Server is installed</li>
               <li>clients will use OpenVPN node as a DNS server</li></ul>
 
     - type: spacer
@@ -136,9 +136,9 @@ onInstall:
                   tooltip:
                     y: -1
                     text: |
-                      Client access to the environmetns private subnets.<br><br>
+                      Client can access own private cloud network.<br><br>
                       <b>Note</b>:<br>
-                      <ul style="list-style: disc inside;"><li>private subnets access works only within the same isolated environment group or within the same region where OpenVPN Access Server is installed</li>
+                      <ul style="list-style: disc inside;"><li>private cloud network is limited with the same <a href="https://docs.jelastic.com/environment-isolation/">isolated environment group</a> or with the same <a href="https://docs.jelastic.com/environment-regions/">region</a> where OpenVPN Access Server is installed</li>
                       <li>clients will use OpenVPN node as a DNS server</li></ul>
 
         buttons:
