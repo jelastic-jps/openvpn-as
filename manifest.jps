@@ -9,9 +9,9 @@ categories:
   - apps/dev-and-admin-tools
 homepage: https://openvpn.net/access-server/
 description:
-  short: A private OpenVPN server installation inside your own cloud environment for establishing secure Internet connection and remote access
+  short: A private OpenVPN server for establishing secure Internet connection and remote access to platform internal resources.
   text: |
-    A dedicated Virtual Private Network (VPN) server installation inside your own cloud environment for processing traffic via an encrypted tunnel to establish secure Internet connection and remote access
+    A dedicated Virtual Private Network (VPN) server installation inside your own cloud environment for processing traffic via an encrypted tunnel to establish secure Internet connection and remote access to platform internal resources.
 
 settings:
   fields:
@@ -35,7 +35,7 @@ settings:
           tooltip:
             y: -1
             text: |
-              Interconnected private networks for authorized access within the <a href="https://docs.jelastic.com/environment-isolation/">isolated environment group</a> or <a href="https://docs.jelastic.com/environment-regions">region</a> where OpenVPN is installed. The DNS queries are resolved by internal platform DNS servers that makes environment and container hostnames associated with their private IP addresses.
+              Interconnected private networks for authorized access within the <a href="https://www.virtuozzo.com/application-platform-docs/environment-isolation/">isolated environment group</a> or <a href="https://www.virtuozzo.com/application-platform-docs/choosing-region/">region</a> where OpenVPN is installed. The DNS queries are resolved by internal platform DNS servers that makes environment and container hostnames associated with their private IP addresses.
               
     - type: spacer
       hideLabel: true
@@ -138,7 +138,7 @@ onInstall:
 
         name: OpenVPN Access Server Add-On
         description:
-          short: Full featured secure network tunneling VPN
+          short: Use this add-on to manage your OpenVPN Access Server.
 
         settings:
           fields:
@@ -162,7 +162,7 @@ onInstall:
                   tooltip:
                     y: -1
                     text: |
-                      Interconnected private networks for authorized access within the <a href="https://docs.jelastic.com/environment-isolation/">isolated environment group</a> or <a href="https://docs.jelastic.com/environment-regions">region</a> where OpenVPN is installed. The DNS queries are resolved by internal platform DNS servers that makes environment and container hostnames associated with their private IP addresses.
+                      Interconnected private networks for authorized access within the <a href="https://www.virtuozzo.com/application-platform-docs/environment-isolation/">isolated environment group</a> or <a href="https://www.virtuozzo.com/application-platform-docs/choosing-region/">region</a> where OpenVPN is installed. The DNS queries are resolved by internal platform DNS servers that makes environment and container hostnames associated with their private IP addresses.
 
         buttons:
           - caption: Client UI
@@ -345,16 +345,13 @@ onInstall:
                   fallbackToX1: true
 
 success: |
-  Admin UI is available here: **[https://${env.domain}:${globals.webUiPort}/admin](https://${env.domain}:${globals.webUiPort}/admin)**.
+  Use the following credentials to access the OpenVPN Access Server admin and client panels:
+  
+  **Admin panel URL:** [https://${env.domain}:${globals.webUiPort}/admin](https://${env.domain}:${globals.webUiPort}/admin)  
+  **Client panel URL:** [https://${env.domain}:${globals.webUiPort}/](https://${env.domain}:${globals.webUiPort}/)
+  **Admin name:** ${globals.username}  
+  **Admin password:** ${globals.password}  
+  **OpenVPN client applications:** [https://openvpn.net/client/](https://openvpn.net/client/)  
 
-  Connection profiles can be downloaded here: **[Client UI](https://${env.domain}:${globals.webUiPort}/)**.
+  To add a custom domain name for your OpenVPN Access Server installation, follow the steps described in our [documentation](https://www.virtuozzo.com/application-platform-docs/custom-domains/).
 
-  * Username: **${globals.username}**
-  * Password: **${globals.password}**
-
-  OpenVPN client applications:
-  * [OpenVPN Connect for Windows 7,8,10](https://openvpn.net/downloads/openvpn-connect-v2-windows.msi)
-  * [OpenVPN Connect for Mac OS X](https://openvpn.net/downloads/openvpn-connect-v2-macos.dmg)
-  * [OpenVPN Connect for Android](https://openvpn.net/clients/index.php?client=openvpn_connect_android)
-  * [OpenVPN Connect for iOS](https://openvpn.net/clients/index.php?client=openvpn_connect_ios)
-  * [OpenVPN for Linux](https://openvpn.net/clients/index.php?client=openvpn_linux)

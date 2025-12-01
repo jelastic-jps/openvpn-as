@@ -1,58 +1,73 @@
-# OpenVPN Access Server with Let’s Encrypt CA
-
-<p align="left"> 
-<img style="padding: 0 15px; float: left;" src="images/logo.png" width="70">
+<p align="center"> 
+<img src="images/logo.png" alt="OpenVPN Access Server">
 </p>
 
-OpenVPN Access Server is a set of tools that simplify the rapid deployment of a remote access VPN server. It is based on the popular OpenVPN open source software, allowing you to work with a configured VPN server using cross-platform client software. The built-in web administration panel provides an ability to setup all possible OpenVPN configurations. It can be complemented with a free Let’s Encrypt SSL certificate with automatic renewal.
+# OpenVPN Access Server with Let’s Encrypt SSL
 
-## OpenVPN Access Server Installation
+The package deploys **[OpenVPN Access Server](https://openvpn.net/access-server/)**, a remote-access VPN server based on the popular OpenVPN open-source software. It allows you to work with a configured VPN server using cross-platform client software. The built-in web administration panel allows you to set up all possible OpenVPN configurations. The package provides an option to complement installation with a free, auto-renewable Let’s Encrypt SSL certificate.
 
-Sign in your Jelastic account and import the [manifest.jps](https://github.com/jelastic-jps/openvpn-as/blob/master/manifest.jps) by pressing **Import** button. 
 
-<p align="left"> 
-<img src="images/import.png" width="600">
-</p>
+## Deployment to Cloud
 
-Choose an installation mode:   
+To get your OpenVPN Access Server solution, click the "**Deploy to Cloud**" button below, specify your email address within the widget, choose one of the [Virtuozzo Public Cloud Providers](https://www.virtuozzo.com/application-platform-partners/), and confirm by clicking **Install**.
 
-  - **Secure Internet Access** provides secured Internet access and prevents threats from rogue public Wi-Fi hotspots and untrusted networks
-  - **Secure Remote Access** provides an access to the private network within in the Cloud:
-      - private cloud network is limited with the same [isolated environment group](https://docs.jelastic.com/environment-isolation/) or with the same [region](https://docs.jelastic.com/environment-regions/) where OpenVPN Access Server is installed
-      - clients will use OpenVPN node as a query forwarder to the DNS server of Jelastic platform that makes environment and container hostnames associated with their private IP addresses
-  -  Pick [Let's Encrypt Add-On](https://jelastic.com/blog/free-ssl-certificates-with-lets-encrypt/) installation to secure OpenVPN Access Server web admin insterface with help of valid SSL certificate.
-  
-<p align="left"> 
-<img src="images/install.png" width="600">
-</p>
+[![Deploy to Cloud](https://raw.githubusercontent.com/jelastic-jps/common/main/images/deploy-to-cloud.png)](https://www.virtuozzo.com/install/?manifest=https://raw.githubusercontent.com/jelastic-jps/openvpn-as/refs/heads/master/manifest.jps)
 
-The expected topology looks as follows:
+> If you already have a Virtuozzo Application Platform (VAP) account, you can deploy this solution from the [Marketplace](https://www.virtuozzo.com/application-platform-docs/marketplace/) or [import](https://www.virtuozzo.com/application-platform-docs/environment-import/) a manifest file from this repository.
 
-<p align="left"> 
-<img src="images/topology-w-IP.png" width="500">
-</p>
+
+## Installation Process
+
+In the opened installation window at the VAP dashboard, you can set up the following parameters:
+
+- Access Mode:
+  - **Secure Internet Access** - provides safer general Internet use by utilizing encrypted tunneling
+    - *How it works:* all your traffic is encrypted and routed through the VPN server before it goes out to the public Internet
+    - *Goal:* to protect your data from potential threats when using untrusted networks (e.g., public Wi-Fi hotspots)
+    - *DNS:* public (Google) DNS server
+  - **Secure Remote Access** - provides a secure access point to your private network within the Virtuozzo Application Platform
+    - *How it works:* all your traffic is encrypted and routed through the VPN server before it goes to your private resources in the same [cloud region](https://www.virtuozzo.com/application-platform-docs/choosing-region/) or [isolated environment group](https://www.virtuozzo.com/application-platform-docs/environment-isolation/) as the OpenVPN Access Server
+    - *Goal:* to securely access your cloud resources from any location
+    - *DNS:* platform's internal DNS server (so private environment and container hostnames work)
+- **Install Let's Encrypt SSL with Auto-Renewal** - enables automatic installation of a free, auto-renewable SSL certificate for your OpenVPN Access Server.
+
+> By default, the platform issues a [built-in SSL](https://www.virtuozzo.com/application-platform-docs/built-in-ssl/) certificate for your application that is valid for the platform domain. However, if you plan to use a custom domain name, tick the [Let's Encrypt SSL](https://www.virtuozzo.com/company/blog/free-ssl-certificates-with-lets-encrypt/) option to attach a public IP and get a free, trusted SSL certificate.
+
+![OpenVPN deployment wizard](images/01-openvpn-deployment-wizard.png)
+
+Next, provide a preferred environment and display names, choose a region (if available), and confirm the installation.
+
 
 ## OpenVPN Management
 
-Using credentials and **Client UI** link you can access a panel from which the OpenVPN profiles can be downloaded. 
+After the installation is complete, you'll receive an email with links and generated credentials for the **admin** and **client** panels. Additionally, you can find this information in the installation success notification at the VAP dashboard.
 
-<p align="left"> 
-<img src="images/success.png" width="400">
-</p>
+![OpenVPN installed](images/02-openvpn-installed.png)
 
-In case you have no OpenVPN client software installed, choose an appropriate one for your OS.
-This solution comes with a free OpenVPN Access Server license for **two** concurrent connections. Use **Admin UI** link and the same credentials to apply for extra connections license or change other settings.
+Use the **Admin UI** to manage the OpenVPN server settings, user permissions, and other configurations. By default, the solution provides a free OpenVPN Access Server license for **two** concurrent connections.
 
-### Admin Panel Custom Domain
+Use the **Client UI** to download the OpenVPN profiles required for connecting to the VPN server.
 
-To generate Let’s Encrypt SSL certificate for a [custom domain](https://docs.jelastic.com/custom-domain-via-arecord), open **Add-Ons** tab, find [Let’s Encrypt SSL Add-On](https://jelastic.com/blog/free-ssl-certificates-with-lets-encrypt/), press **Configure** and specify the custom domain name which should be bound to a public IP of your node at your domain registrar.  
+For additional management options, you can also access **Add-Ons** for your OpenVPN Access Server environment at the VAP dashboard. Here, you can find the following add-ons:
 
-### Access Server Mode
+- **OpenVPN Access Server Add-On** - allows you to access the *Admin UI* and *Client UI* panels, *change the access mode* (Secure Internet Access or Secure Remote Access) of your VPN solution, and *reset the admin password* if needed.
+- **Let’s Encrypt SSL Add-On** - enables you to configure a *[custom domain](https://www.virtuozzo.com/application-platform-docs/custom-domains/)* for your OpenVPN Access Server. Click **Configure** and specify a custom domain name that should be bound to the public IP of your node at your domain registrar.
 
-If necessary you can change the mode of VPN solution via **OpenVPN Access Server Add-On**.
+![OpenVPN add-ons](images/03-openvpn-addons.png)
 
-<p align="left"> 
-<img src="images/change-mode.png" width="400">
-</p>
 
-Try out the OpenVPN Access Server solution with [Jelastic Multi-Cloud PaaS](https://jelastic.cloud) 
+## Connect to OpenVPN Server
+
+1\. Download the OpenVPN profile from the **Client UI** panel using the credentials provided after the installation.
+
+![OpenVPN client panel](images/04-openvpn-client-panel.png)
+
+2\. Download and install the **[OpenVPN client](https://openvpn.net/client/)** software on your device.
+
+3\. Use the **Upload File** option to import the downloaded OpenVPN profile into the OpenVPN client application.
+
+4\. Click **Connect** for the VPN server from the uploaded profile and provide your password when prompted.
+
+![OpenVPN client application](images/05-openvpn-client-application.png)
+
+That's it! You are now connected to your OpenVPN Access Server.
